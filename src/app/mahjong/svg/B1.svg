@@ -1,7 +1,0 @@
-<svg height="100" width="64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <circle cx="32" cy="50" r="30" stroke="green"  stroke-width="2" fill="none"></circle>
-  <circle cx="32" cy="50" r="23" stroke="maroon" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="1,12"></circle>
-  <circle cx="32" cy="50" r="23" stroke="maroon" stroke-width="2" fill="none"></circle>
-  <circle cx="32" cy="50" r="16" stroke="maroon" stroke-width="2" fill="none"></circle>
-  <circle cx="32" cy="50" r="8"  stroke="maroon" stroke-width="2" fill="none"></circle>
-</svg>

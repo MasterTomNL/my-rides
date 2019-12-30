@@ -1,5 +1,0 @@
-<svg height="100" width="64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <path id="svg_1" stroke="green" stroke-width="3" fill="none" d="m8,16q0,-8 8,-8l32,0q8,0 8,8l0,68q0,8 -8,8l-32,0q-8,0 -8,-8l0,-68"/>
-  <path id="svg_2" stroke="maroon" stroke-width="3" fill="none" d="m16,24q0,-8 8,-8l16,0q8,0 8,8l0,52q0,8 -8,8l-16,0q-8,0 -8,-8l0,-52"/>
-  <path id="svg_3" stroke="maroon" stroke-width="3" fill="none" d="m16,24q8,0 8,-8m16,0q0,8 8,8m0,52q-8,0 -8,8m-16,0q0,-8 -8,-8"/>
-</svg>
