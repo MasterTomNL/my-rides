@@ -1,0 +1,23 @@
+<h2>Futoshiki</h2>
+
+<mat-form-field>
+  <mat-label>Pick a challenge</mat-label>
+  <mat-select [(ngModel)]="challenge">
+    <mat-option *ngFor="let c of challenges" [value]="c">
+      {{ c.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div class="form-group" *ngFor="let r of [0,1,2,3]">
+  <div *ngFor="let c of [0,1,2,3]" class="futo-cell">
+    <button mat-raised-button (click)="add(r,c)"
+        [disabled]="challenge.disabled[r][c] > 0"
+        [ngClass]="valid(r,c)">
+        {{ challenge.cells[r][c] }}
+    </button>
+    <mat-icon [ngClass]="challenge.arrows[r][c]">
+      {{ arrow_lib[challenge.arrows[r][c]] }}
+    </mat-icon>
+  </div>
+</div>

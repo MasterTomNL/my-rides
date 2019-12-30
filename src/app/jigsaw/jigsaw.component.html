@@ -1,0 +1,31 @@
+<h2>Jigsaw</h2>
+
+<p>R does not touch Y (even diagonally).</p>
+<p>E does not touch Z (even diagonally).</p>
+<p>F does not touch T (even diagonally).</p>
+<p>Y is not in square A3.</p>
+
+<div class="boundary">
+  <mat-grid-list cols="{{ grid.cols }}">
+    <mat-grid-tile
+      *ngFor="let c of makeArray(grid.rows * grid.cols); let i = index"
+      [rowspan]="1" [colspan]="1" [style.background]="alternateColor(i)">
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="{{ grid.cols }}">
+    <mat-grid-tile
+      *ngFor="let piece of pieces; let i = index"
+      [rowspan]="piece.rows" [colspan]="piece.cols"
+      [style.background]="randomColor(i)"
+      cdkDragBoundary=".boundary" cdkDrag>
+      <div class="internal">
+        <mat-grid-list cols="{{ piece.cols }}">
+          <mat-grid-tile class="shapeLetter"
+            *ngFor="let c of piece.contents" [rowspan]="1" [colspan]="1">
+            <span>{{ c }}</span>
+          </mat-grid-tile> 
+        </mat-grid-list>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

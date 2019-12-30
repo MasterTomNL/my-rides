@@ -1,0 +1,13 @@
+mat-panel-description {
+  display: inline-block;
+  text-align: right;
+}
+.locStar {
+  margin-left: 5px;
+  color: gold;
+  font-size: 16px;
+}
+.muted {
+  color: #bbb;
+  font-weight: normal;
+}

@@ -1,0 +1,55 @@
+<h2>
+  Rides
+  <button *ngIf="reloading == false" mat-icon-button (click)="refresh()">
+    <mat-icon>autorenew</mat-icon>
+  </button>
+  <mat-progress-spinner *ngIf="reloading == true" diameter=20 mode="indeterminate"></mat-progress-spinner>
+</h2>
+<!--
+<button mat-icon-button (click)="export()">
+  <mat-icon>cloud_download</mat-icon>
+</button>-->
+<small *ngIf="loadInSeconds" class="muted">Load in {{ loadInSeconds }} seconds.<br /></small>
+<button mat-icon-button (click)="add()">
+  <mat-icon>add_circle</mat-icon>
+</button>
+
+<!-- filter -->
+<mat-form-field>
+  <mat-label>Vehicle filter</mat-label>
+  <mat-select [(ngModel)]="filterVehicle">
+    <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle">
+      {{ vehicle.license + ' - ' + vehicle.make + ' ' + vehicle.model }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-checkbox [(ngModel)]="filterPrivate">private only</mat-checkbox>
+
+<mat-list class="lesspadding">
+  <div *ngFor="let ride of rides | rideVehicle: filterVehicle : filterPrivate; let i = index">
+    <mat-divider *ngIf="i == 0 || i > 0 && ride.date != rides[i-1].date"></mat-divider>
+    <mat-list-item *ngIf="i == 0 || i > 0 && ride.date[6] != rides[i-1].date[6]">
+      <h3>{{ ride.date | date: 'MMMM' }}</h3>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+    <mat-list-item *ngIf="i == 0 || (i > 0 && ride.date != rides[i-1].date)">
+      <h3 class="nomargin muted">{{ ride.date | date: 'fullDate' }}</h3>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon matListIcon class="muted smaller"
+        title="{{ ride.start.name }}">{{ ride.start.type }}</mat-icon>
+      <mat-icon matListIcon class="muted smaller">arrow_right</mat-icon>
+      <mat-icon matListIcon
+        title="{{ ride.end.name }}">{{ ride.end.type }}</mat-icon>
+      <h3 matLine>{{ ride.end.name }}</h3>
+      <h3>
+        {{ ride.meter }}
+        <mat-icon *ngIf="ride.isPrivate" class="red private-badge" title="private">error_outline</mat-icon>
+      </h3>
+      <small class="muted padding-left-6" *ngIf="ride.distance">({{ ride.distance }})</small>
+      <button mat-icon-button (click)="edit(ride, i)">
+          <mat-icon>edit</mat-icon>
+      </button>
+    </mat-list-item>
+  </div>
+</mat-list>

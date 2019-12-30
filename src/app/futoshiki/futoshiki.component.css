@@ -1,0 +1,38 @@
+.futo-cell {
+  position: relative;
+  display: inline-block;
+  width: 20%;
+  margin-right: 5%;
+  margin-bottom: 14px;
+}
+.futo-cell button {
+  display: inline-block;
+  height: 32px;
+  width: 100%;
+  border: 1px solid;
+}
+.futo-cell mat-icon {
+  position: absolute;
+}
+.futo-cell mat-icon.d {
+  bottom: -4px;
+  left: 16px;
+}
+.futo-cell mat-icon.u {
+  top: -17px;
+  left: 20px;
+}
+.futo-cell mat-icon.r {
+  top: 4px;
+  right: -20px;
+}
+.futo-cell mat-icon.l {
+  top: 4px;
+  left: -20px;
+}
+.warn {
+  color: red;
+}
+.mat-raised-button.muted {
+  opacity: 0.25;
+}

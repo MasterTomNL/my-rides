@@ -1,0 +1,72 @@
+<h2 mat-dialog-title>A ride...</h2>
+
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Meter was {{ meter }}</mat-label>
+    <input matInput [(ngModel)]="ride.meter" placeholder="meter" (change)="calcDistance()">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="ride.distance" placeholder="distance" (change)="calcMeter()">
+  </mat-form-field>
+
+  <mat-checkbox [(ngModel)]="toggleCalc">Calculate?</mat-checkbox>
+
+  <button mat-raised-button (click)="save(ride, true)">
+    <mat-icon>save</mat-icon> save
+  </button>
+
+	<mat-form-field>
+		<input matInput placeholder="Date" [(ngModel)]="ride.date">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Start location</mat-label>
+    <mat-select [(ngModel)]="ride.startId">
+      <mat-option *ngFor="let location of locations" [value]="location.id">
+        {{ location.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-icon-button (click)="switch()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+
+  <mat-form-field>
+    <mat-label>Destination</mat-label>
+    <mat-select [(ngModel)]="ride.endId">
+      <mat-option *ngFor="let location of locations" [value]="location.id">
+        {{ location.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Vehicle</mat-label>
+    <mat-select [(ngModel)]="ride.vehicleId">
+      <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">
+        {{ vehicle.license + ' - ' + vehicle.make + ' ' + vehicle.model }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Notes</mat-label>
+    <input matInput [(ngModel)]="ride.notes" placeholder="notes">
+  </mat-form-field>
+
+  <mat-checkbox [(ngModel)]="ride.isPrivate">Private trip?</mat-checkbox>
+</mat-dialog-content>
+<mat-dialog-actions>
+	<button mat-raised-button (click)="save(ride, true)">
+    <mat-icon>save</mat-icon> save
+  </button>
+	<button mat-raised-button (click)="save(ride, false)">
+    <mat-icon>save</mat-icon> save + 1
+  </button>
+	<mat-progress-spinner *ngIf="ride.saving == true" diameter=20 mode="indeterminate"></mat-progress-spinner>
+	<mat-icon *ngIf="ride.saved == true">check</mat-icon>
+	<mat-icon *ngIf="ride.saved == 'error'">cancel</mat-icon>
+	<button class="mat-button" (click)="close()">Cancel</button>
+</mat-dialog-actions>

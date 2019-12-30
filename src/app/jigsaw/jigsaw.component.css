@@ -1,0 +1,18 @@
+.shape div {
+  display: inline-block;
+  font-size: 2em;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+.internal {
+  height: 100%;
+  width: 100%;
+}
+.shapeLetter {
+  font-size: 2em;
+  color: white;
+}
+.shapeLetter span {
+  color: white;
+}

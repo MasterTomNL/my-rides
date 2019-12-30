@@ -1,0 +1,59 @@
+<h2>Vehicles
+  <button *ngIf="reloading == false" mat-icon-button (click)="refresh()">
+    <mat-icon>autorenew</mat-icon>
+  </button>
+  <mat-progress-spinner *ngIf="reloading == true" diameter=20 mode="indeterminate"></mat-progress-spinner>
+</h2>
+<!--<button mat-icon-button (click)="import()" title="import vehicles">
+  <mat-icon>cloud_upload</mat-icon>
+</button>-->
+<small *ngIf="loadInSeconds" class="muted">Load in {{ loadInSeconds }} seconds.<br /></small>
+<button mat-icon-button (click)="add()">
+  <mat-icon>add_circle</mat-icon>
+</button>
+<mat-accordion multi="true">
+  <mat-expansion-panel *ngFor="let vehicle of vehicles">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ vehicle.make + ' ' + vehicle.model }}
+        <mat-icon *ngIf="vehicle.hasPriority" class="locStar">star</mat-icon>
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ vehicle.license }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-checkbox [(ngModel)]="vehicle.hasPriority">
+      Favorite vehicle?
+    </mat-checkbox>
+    
+    <mat-form-field>
+      <input matInput [(ngModel)]="vehicle.license" placeholder="license">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="vehicle.make" placeholder="make">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="vehicle.model" placeholder="model">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="vehicle.startDate" placeholder="start of lease">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="vehicle.startMeter" placeholder="meter at start">
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+    <button mat-icon-button (click)="save(vehicle)">
+      <mat-icon>save</mat-icon>
+    </button>
+    <!--<button mat-icon-button (click)="delete(vehicle.id)" title="Delete this vehicle" aria-label="delete this vehicle">
+      <mat-icon>delete</mat-icon>
+    </button>-->
+    <mat-progress-spinner *ngIf="savingID == vehicle.id" mode="indeterminate" diameter="15"></mat-progress-spinner>
+  </mat-expansion-panel>
+</mat-accordion>

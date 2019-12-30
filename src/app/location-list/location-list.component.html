@@ -1,0 +1,72 @@
+<h2>Locations
+  <button *ngIf="reloading == false" mat-icon-button (click)="refresh()">
+    <mat-icon>autorenew</mat-icon>
+  </button>
+  <mat-progress-spinner *ngIf="reloading == true" diameter=20 mode="indeterminate"></mat-progress-spinner>
+</h2>
+<small *ngIf="loadInSeconds" class="muted">Load in {{ loadInSeconds }} seconds.</small><br />
+<!--<button mat-icon-button (click)="import()">
+  <mat-icon>cloud_upload</mat-icon>
+</button>-->
+<button mat-icon-button (click)="add()">
+  <mat-icon>add_circle</mat-icon>
+</button>
+<mat-accordion multi="true">
+  <mat-expansion-panel *ngFor="let location of locations">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon class="locBadge">{{ location.type }}</mat-icon>
+        {{ location.name }}
+        <mat-icon *ngIf="location.hasPriority" class="locStar">star</mat-icon>
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ location.city }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-checkbox [(ngModel)]="location.hasPriority">Favorite location?</mat-checkbox>
+    
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <mat-select [(ngModel)]="location.type">
+        <mat-option *ngFor="let type of types" [value]="type[0]">
+          {{ type[1] }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.name" placeholder="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.id" placeholder="id">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.street" placeholder="street">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.houseNumber" placeholder="house number">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.zip" placeholder="zip">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.city" placeholder="city">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="location.countryCode" placeholder="country code (NL)">
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+    <button mat-icon-button (click)="save(location)">
+      <mat-icon>save</mat-icon>
+    </button>
+    <mat-progress-spinner *ngIf="savingId == location.id" mode="indeterminate" diameter="15"></mat-progress-spinner>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,32 @@
+<app-top-bar></app-top-bar>
+<nav>
+  <a routerLink="/" routerLinkActive="active">
+    <mat-icon>navigation</mat-icon>
+  </a>
+  <a routerLink="/vehicles" routerLinkActive="active">
+    <mat-icon>directions_car</mat-icon>
+  </a>
+  <a routerLink="/locations" routerLinkActive="active">
+    <mat-icon>room</mat-icon>
+  </a>
+<!--  <a routerLink="/statistics" routerLinkActive="">
+    <mat-icon>bar_chart</mat-icon>
+  </a>-->
+  <a routerLink="/futoshiki" routerLinkActive="">
+    <mat-icon>gamepad</mat-icon>
+  </a>
+  <a routerLink="/jigsaw" routerLinkActive="">
+    <mat-icon>extension</mat-icon>
+  </a>
+  <a routerLink="/mahjong" routerLinkActive="">
+    <mat-icon>grade</mat-icon>
+  </a>
+  <button title="Login?" *ngIf="authenticated_user == null" (click)="loginGoogle()">
+    <mat-icon>lock</mat-icon>
+  </button>
+  <button title="log out?" *ngIf="authenticated_user != null" mat-icon-button (click)="logout()">
+    <mat-icon>verified_user</mat-icon>
+  </button>
+</nav>
+
+<router-outlet></router-outlet>
