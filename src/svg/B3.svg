@@ -1,0 +1,11 @@
+<svg height="100" width="64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <circle cx="16" cy="25" r="12" stroke="green"  stroke-width="2" fill="none"></circle>
+  <circle cx="16" cy="25" r="8"  stroke="green"  stroke-width="2" fill="none"></circle>
+  <circle cx="16" cy="25" r="4"  stroke="green"  stroke-width="2" fill="none"></circle>
+  <circle cx="32" cy="50" r="12" stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="32" cy="50" r="8"  stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="32" cy="50" r="4"  stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="48" cy="75" r="12" stroke="green"  stroke-width="2" fill="none"></circle>
+  <circle cx="48" cy="75" r="8"  stroke="green"  stroke-width="2" fill="none"></circle>
+  <circle cx="48" cy="75" r="4"  stroke="green"  stroke-width="2" fill="none"></circle>
+</svg>

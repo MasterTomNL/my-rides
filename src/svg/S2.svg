@@ -1,0 +1,16 @@
+<svg height="100" width="64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <circle stroke-width="3" fill="none" stroke="green" r="5" cy="10.16835" cx="31.649838"/>
+  <circle stroke-width="3" fill="none" stroke="green" r="5" cy="25.16835" cx="31.649838"/>
+  <circle stroke-width="3" fill="none" stroke="green" r="5" cy="40.16835" cx="31.649838"/>
+  <circle stroke-width="3" fill="none" stroke="green" r="5" cy="60.16835" cx="31.649838"/>
+  <circle stroke-width="3" fill="none" stroke="green" r="5" cy="75.16835" cx="31.649838"/>
+  <circle stroke-width="3" fill="none" stroke="green" r="5" cy="90.16835" cx="31.649838"/>
+  <line stroke-width="3" stroke="green" y2="22.16835" x2="27.649838" y1="13.16835" x1="27.649838"/>
+  <line stroke-width="3" stroke="green" y2="37.16835" x2="27.649838" y1="28.16835" x1="27.649838"/>
+  <line stroke-width="3" stroke="green" y2="22.16835" x2="35.649838" y1="13.16835" x1="35.649838"/>
+  <line stroke-width="3" stroke="green" y2="37.16835" x2="35.649838" y1="28.16835" x1="35.649838"/>
+  <line stroke-width="3" stroke="green" y2="72.16835" x2="27.649838" y1="63.16835" x1="27.649838"/>
+  <line stroke-width="3" stroke="green" y2="87.16835" x2="27.649838" y1="78.16835" x1="27.649838"/>
+  <line stroke-width="3" stroke="green" y2="72.16835" x2="35.649838" y1="63.16835" x1="35.649838"/>
+  <line stroke-width="3" stroke="green" y2="87.16835" x2="35.649838" y1="78.16835" x1="35.649838"/>
+</svg>
