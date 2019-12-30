@@ -12,6 +12,8 @@
   height: 24px;
   width: 16px;
   background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   margin: 4px;
 }
 
@@ -42,8 +44,8 @@
 .s-7 { background-image: url('/assets/svg/S7.svg'); }
 .s-8 { background-image: url('/assets/svg/S8.svg'); }
 .s-9 { background-image: url('/assets/svg/S9.svg'); }
-.d-g { background-image: url('/assets/svg/dragon-white.svg'); }
-.d-r { background-image: url('/assets/svg/dragon-white.svg'); }
+.d-g { background-image: url('/assets/svg/dragon-green.svg'); }
+.d-r { background-image: url('/assets/svg/dragon-red.svg'); }
 .d-w { background-image: url('/assets/svg/dragon-white.svg'); }
 .w-n { background-image: url('/assets/svg/dragon-white.svg'); }
 .w-s { background-image: url('/assets/svg/dragon-white.svg'); }
