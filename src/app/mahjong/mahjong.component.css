@@ -1,0 +1,51 @@
+.tile {
+  display: inline-block;
+  height: 56px;
+  width: 32px;
+  border: 2px outset;
+  text-align: center;
+  padding: 2px;
+  background: #efecec;
+}
+.tile i {
+  display: block;
+  height: 24px;
+  width: 16px;
+  background-size: contain;
+  margin: 4px;
+}
+
+.c-1 { background-image: url('/assets/svg/C1.svg'); }
+.c-2 { background-image: url('/assets/svg/C2.svg'); }
+.c-3 { background-image: url('/assets/svg/C3.svg'); }
+.c-4 { background-image: url('/assets/svg/C4.svg'); }
+.c-5 { background-image: url('/assets/svg/C5.svg'); }
+.c-6 { background-image: url('/assets/svg/C6.svg'); }
+.c-7 { background-image: url('/assets/svg/C7.svg'); }
+.c-8 { background-image: url('/assets/svg/C8.svg'); }
+.c-9 { background-image: url('/assets/svg/C9.svg'); }
+.b-1 { background-image: url('/assets/svg/B1.svg'); }
+.b-2 { background-image: url('/assets/svg/B2.svg'); }
+.b-3 { background-image: url('/assets/svg/B3.svg'); }
+.b-4 { background-image: url('/assets/svg/B4.svg'); }
+.b-5 { background-image: url('/assets/svg/B5.svg'); }
+.b-6 { background-image: url('/assets/svg/B6.svg'); }
+.b-7 { background-image: url('/assets/svg/B7.svg'); }
+.b-8 { background-image: url('/assets/svg/B8.svg'); }
+.b-9 { background-image: url('/assets/svg/B9.svg'); }
+.s-1 { background-image: url('/assets/svg/S1.svg'); }
+.s-2 { background-image: url('/assets/svg/S2.svg'); }
+.s-3 { background-image: url('/assets/svg/S3.svg'); }
+.s-4 { background-image: url('/assets/svg/S4.svg'); }
+.s-5 { background-image: url('/assets/svg/S5.svg'); }
+.s-6 { background-image: url('/assets/svg/S6.svg'); }
+.s-7 { background-image: url('/assets/svg/S7.svg'); }
+.s-8 { background-image: url('/assets/svg/S8.svg'); }
+.s-9 { background-image: url('/assets/svg/S9.svg'); }
+.d-g { background-image: url('/assets/svg/dragon-white.svg'); }
+.d-r { background-image: url('/assets/svg/dragon-white.svg'); }
+.d-w { background-image: url('/assets/svg/dragon-white.svg'); }
+.w-n { background-image: url('/assets/svg/dragon-white.svg'); }
+.w-s { background-image: url('/assets/svg/dragon-white.svg'); }
+.w-e { background-image: url('/assets/svg/dragon-white.svg'); }
+.w-w { background-image: url('/assets/svg/dragon-white.svg'); }
