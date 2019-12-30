@@ -1,0 +1,8 @@
+<svg height="100" width="64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <circle cx="32" cy="25" r="15" stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="32" cy="25" r="10" stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="32" cy="25" r="5"  stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="32" cy="75" r="15" stroke="green"  stroke-width="2" fill="none"></circle>
+  <circle cx="32" cy="75" r="10" stroke="green"  stroke-width="2" fill="none"></circle>
+  <circle cx="32" cy="75" r="5"  stroke="green"  stroke-width="2" fill="none"></circle>
+</svg>

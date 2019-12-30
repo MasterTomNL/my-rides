@@ -1,0 +1,25 @@
+<svg height="100" width="64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <circle cx="12" cy="12" r="9" stroke="green" stroke-width="2" fill="none"></circle>
+  <circle cx="12" cy="12" r="6" stroke="green" stroke-width="2" fill="none"></circle>
+  <circle cx="12" cy="12" r="3" stroke="green" stroke-width="2" fill="none"></circle>
+  <circle cx="30" cy="24" r="9" stroke="green" stroke-width="2" fill="none"></circle>
+  <circle cx="30" cy="24" r="6" stroke="green" stroke-width="2" fill="none"></circle>
+  <circle cx="30" cy="24" r="3" stroke="green" stroke-width="2" fill="none"></circle>
+  <circle cx="48" cy="36" r="9" stroke="green" stroke-width="2" fill="none"></circle>
+  <circle cx="48" cy="36" r="6" stroke="green" stroke-width="2" fill="none"></circle>
+  <circle cx="48" cy="36" r="3" stroke="green" stroke-width="2" fill="none"></circle>
+  
+  <circle cx="16" cy="58" r="9" stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="16" cy="58" r="6" stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="16" cy="58" r="3" stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="48" cy="58" r="9" stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="48" cy="58" r="6" stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="48" cy="58" r="3" stroke="maroon" stroke-width="2" fill="none"></circle>
+  
+  <circle cx="16" cy="80" r="9" stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="16" cy="80" r="6" stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="16" cy="80" r="3" stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="48" cy="80" r="9" stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="48" cy="80" r="6" stroke="maroon" stroke-width="2" fill="none"></circle>
+  <circle cx="48" cy="80" r="3" stroke="maroon" stroke-width="2" fill="none"></circle>
+</svg>
