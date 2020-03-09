@@ -13,7 +13,7 @@
   Load in {{ loadInSeconds }} seconds.<br />
 </small>
 <small class="muted" *ngIf="totals.regular">
-  {{ totals.private }}km privé gereden dit jaar.
+  {{ totals.private }}km privé gereden dit jaar (max: {{ privateLimit }}).
 </small><br />
 <button mat-icon-button (click)="add()">
   <mat-icon>add_circle</mat-icon>
@@ -48,7 +48,7 @@
         title="{{ ride.end.name }}">{{ ride.end.type }}</mat-icon>
       <h3 matLine>{{ ride.end.name }}</h3>
       <h3>
-        {{ ride.meter }}
+        {{ ride.meter | number: '': 'nl' }}
         <mat-icon *ngIf="ride.isPrivate" class="red private-badge" title="private">error_outline</mat-icon>
       </h3>
       <small class="muted padding-left-6" *ngIf="ride.distance">({{ ride.distance }})</small>

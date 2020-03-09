@@ -11,6 +11,10 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RideEditComponent } from './ride-edit/ride-edit.component';
 import { formatDate } from "@angular/common";
 
+import { registerLocaleData } from '@angular/common';
+import localeNl from '@angular/common/locales/nl';
+registerLocaleData(localeNl, 'nl');
+
 import * as XLSX from 'xlsx';
 
 
@@ -29,6 +33,7 @@ export class RideListComponent implements OnInit {
   loadInSeconds;
   filterVehicle = null;
   filterPrivate = false;
+  privateLimit = 0;
 
   totals = { regular:0, private:0 };
 
@@ -88,6 +93,7 @@ export class RideListComponent implements OnInit {
   }
 
   getRides(): void {
+    this.privateLimit = Math.round(moment().month() * (500 / 12));
     this.rideService.get().subscribe(result => {
       result.forEach((ride) => {
         ride.vehicle = this.vehicles.find(x => x.id == ride.vehicleId);
