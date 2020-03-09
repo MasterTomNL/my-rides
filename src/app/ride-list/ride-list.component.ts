@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 
+import moment from 'moment';
+
 import { Ride } from '../interfaces/ride';
 import { RideService } from '../services/ride.service';
 import { VehicleService } from '../services/vehicle.service';
@@ -27,6 +29,8 @@ export class RideListComponent implements OnInit {
   loadInSeconds;
   filterVehicle = null;
   filterPrivate = false;
+
+  totals = { regular:0, private:0 };
 
   constructor(
     private auth: AngularFireAuth,
@@ -89,6 +93,15 @@ export class RideListComponent implements OnInit {
         ride.vehicle = this.vehicles.find(x => x.id == ride.vehicleId);
         ride.start = this.locations.find(x => x.id == ride.startId);
         ride.end = this.locations.find(x => x.id == ride.endId);
+
+        // collecting some stats
+        let date = moment(ride.date, 'YYYY-MM-DD');
+        if (date.year() == moment().year()) {
+          if (ride.isPrivate)
+            this.totals.private += Number(ride.distance);
+          else
+            this.totals.regular += Number(ride.distance);
+        }
       });
       this.rides = result;
       this.reloading = false;

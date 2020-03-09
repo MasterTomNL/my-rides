@@ -11,6 +11,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input'; 
 import { MatListModule } from '@angular/material/list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select'; 
 
@@ -32,6 +33,8 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { firebaseConfig } from './firebase-config.ts';
+
+import { ChartModule } from 'angular-highcharts';
 
 import { RideService } from './services/ride.service';
 import { LocationService } from './services/location.service';
@@ -69,19 +72,24 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
+    HttpClientModule,
     FormsModule,
+    
     MatButtonModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
-    MatProgressSpinnerModule,
     MatSelectModule,
     MatExpansionModule,
-    HttpClientModule,
     MatCheckboxModule,
     MatDialogModule,
     MatGridListModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    
     DragDropModule,
+
+    ChartModule,
 
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
@@ -107,6 +115,7 @@ const appRoutes: Routes = [
     MessageService,
     LocationService,
     VehicleService,
-  ]
+  ],
+  entryComponents: [ RideEditComponent ]
 })
 export class AppModule {}

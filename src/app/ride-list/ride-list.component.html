@@ -9,7 +9,12 @@
 <button mat-icon-button (click)="export()">
   <mat-icon>cloud_download</mat-icon>
 </button>-->
-<small *ngIf="loadInSeconds" class="muted">Load in {{ loadInSeconds }} seconds.<br /></small>
+<small *ngIf="loadInSeconds" class="muted">
+  Load in {{ loadInSeconds }} seconds.<br />
+</small>
+<small class="muted" *ngIf="totals.regular">
+  {{ totals.private }}km privé gereden dit jaar.
+</small><br />
 <button mat-icon-button (click)="add()">
   <mat-icon>add_circle</mat-icon>
 </button>

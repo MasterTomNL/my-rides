@@ -3,11 +3,11 @@
 <mat-dialog-content>
   <mat-form-field>
     <mat-label>Meter was {{ meter }}</mat-label>
-    <input matInput [(ngModel)]="ride.meter" placeholder="meter" (change)="calcDistance()">
+    <input matInput [(ngModel)]="ride.meter" placeholder="meter" (change)="calcDistance()" type="number">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput [(ngModel)]="ride.distance" placeholder="distance" (change)="calcMeter()">
+    <input matInput [(ngModel)]="ride.distance" placeholder="distance" (change)="calcMeter()" type="number">
   </mat-form-field>
 
   <mat-checkbox [(ngModel)]="toggleCalc">Calculate?</mat-checkbox>
