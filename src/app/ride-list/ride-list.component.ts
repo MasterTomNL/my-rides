@@ -93,8 +93,10 @@ export class RideListComponent implements OnInit {
   }
 
   getRides(): void {
-    this.privateLimit = Math.round(moment().month() * (500 / 12));
+    this.privateLimit = Math.round((moment().month() + 1) * (500 / 12));
     this.rideService.get().subscribe(result => {
+      this.totals.private = 0;
+      this.totals.regular = 0;
       result.forEach((ride) => {
         ride.vehicle = this.vehicles.find(x => x.id == ride.vehicleId);
         ride.start = this.locations.find(x => x.id == ride.startId);
