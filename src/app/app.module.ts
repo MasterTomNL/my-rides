@@ -45,6 +45,7 @@ import { FutoshikiComponent } from './futoshiki/futoshiki.component';
 import { JigsawComponent } from './jigsaw/jigsaw.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MahjongComponent } from './mahjong/mahjong.component';
+import { CoronaComponent } from './corona/corona.component';
 
 
 const appRoutes: Routes = [
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
     redirectTo: '',
     pathMatch: 'full'
   },
+  { path: 'corona', component: CoronaComponent },
   { path: '**',
     redirectTo: '',
     pathMatch: 'full'
@@ -108,6 +110,7 @@ const appRoutes: Routes = [
     FutoshikiComponent,
     JigsawComponent,
     MahjongComponent,
+    CoronaComponent,
   ],
   bootstrap: [ AppComponent ],
   providers: [
