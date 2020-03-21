@@ -27,7 +27,7 @@ export class VehicleListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getVehicles();
+    this.refresh();
   }
 
   refresh() {

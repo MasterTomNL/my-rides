@@ -20,7 +20,7 @@ export class CoronaComponent implements OnInit {
   ngOnInit() {
     this.chart = new Chart({
       chart: {
-        type: 'lin'
+        type: 'line'
       },
       xAxis: { categories: [
         'Eerder',
@@ -46,14 +46,14 @@ export class CoronaComponent implements OnInit {
         '20/Mar',
       ]},
       title: {
-        text: 'Corona'
+        text: 'Corona in Nederland'
       },
       credits: {
         enabled: false
       },
       series: [
-        { name: 'New cases', data: this.corona.new },
-        { name: 'Deaths', data: this.corona.deaths }
+        { name: 'New cases', data: this.corona.new, color: 'black' },
+        { name: 'Deaths', data: this.corona.deaths, color: 'red' }
       ]
     });
   }

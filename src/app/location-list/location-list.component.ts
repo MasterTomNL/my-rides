@@ -40,7 +40,7 @@ export class LocationListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getLocations();
+    this.refresh();
   }
 
   refresh() {
