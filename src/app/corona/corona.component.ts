@@ -86,7 +86,7 @@ export class CoronaComponent implements OnInit {
       },
       series: [
         { name: 'Verified cases', data: this.corona.demographic.recorded, color: 'black' },
-        { name: 'In hospital', data: this.corona.demographic.hospital, color: 'green' },
+        { name: 'Was/Is in hospital', data: this.corona.demographic.hospital, color: 'green' },
         { name: 'Deaths', data: this.corona.demographic.deaths, color: 'red' }
       ]
     });
