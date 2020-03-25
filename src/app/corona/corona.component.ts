@@ -29,6 +29,7 @@ export class CoronaComponent implements OnInit {
       chart: {
         type: 'line'
       },
+      yAxis: { title: { text: ''}},
       xAxis: { categories: [
         'Eerder',
         '01/Mar',
@@ -75,7 +76,8 @@ export class CoronaComponent implements OnInit {
       chart: {
         type: 'bar'
       },
-      xAxis: { categories: [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,'NA']},
+      yAxis: { title: { text: ''}},
+      xAxis: { title: { text:'Age' }, categories: [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,'NA']},
       title: {
         text: 'Demographic'
       },
