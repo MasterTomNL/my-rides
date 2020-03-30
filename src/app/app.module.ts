@@ -39,6 +39,8 @@ import { ChartModule } from 'angular-highcharts';
 import { RideService } from './services/ride.service';
 import { LocationService } from './services/location.service';
 import { VehicleService } from './services/vehicle.service';
+import { NiceService } from './services/nice.service';
+
 import { StatisticsComponent } from './statistics/statistics.component';
 import { SettingsComponent } from './settings/settings.component';
 import { FutoshikiComponent } from './futoshiki/futoshiki.component';
@@ -118,6 +120,7 @@ const appRoutes: Routes = [
     MessageService,
     LocationService,
     VehicleService,
+    NiceService,
   ],
   entryComponents: [ RideEditComponent ]
 })

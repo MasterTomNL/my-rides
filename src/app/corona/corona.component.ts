@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Chart } from 'angular-highcharts';
+import { NiceService } from '../services/nice.service';
 
 
 @Component({
@@ -9,12 +10,14 @@ import { Chart } from 'angular-highcharts';
   styleUrls: ['./corona.component.css']
 })
 export class CoronaComponent implements OnInit {
+  nice;
   chart;
+  // 6,-3,5,-2,9,29,2,14,17,-21,5,60,-10,80,-35,21,102,14,54,63,125,103,-63,-18,266,41,167,153
   corona = {
-    'new': [6,3,8,6,15,44,46,60,77,56,61,121,111,190,155,176,278,292,346,409,534,637,573,545,811,852,1019,1172],
-    'delta': [6,-3,5,-2,9,29,2,14,17,-21,5,60,-10,80,-35,21,102,14,54,63,125,103,-63,-18,266,41,167,153],
-    'deaths': [0,0,0,0,0,0,1,0,2,0,1,1,0,5,2,8,4,19,15,18,30,30,43,34,63,80,78,112],
-    'ic': [1,1,0,0,3,1,2,3,5,4,8,6,21,14,17,27,33,35,53,55,86,66,68,100,104,105,82],
+    'new': [6,3,8,6,15,44,46,60,77,56,61,121,111,190,155,176,278,292,346,409,534,637,573,545,811,852,1019,1172,1159,1104],
+    'delta': [],
+    'deaths': [0,0,0,0,0,0,1,0,2,0,1,1,0,5,2,8,4,19,15,18,30,30,43,34,63,80,78,112,93,132],
+    'ic': [], //[1,1,0,0,3,1,2,3,5,4,8,6,21,14,17,27,33,35,53,55,86,66,68,100,104,105,82
     'demographic': {
       'recorded': [23,6,30,42,119,322,330,283,282,460,529,602,487,484,562,599,574,426,175,53,24],
       'hospital': [10,1,4,4,5,23,28,20,27,87,115,131,157,226,265,275,233,167,47,3,5],
@@ -22,9 +25,31 @@ export class CoronaComponent implements OnInit {
     }
   };
 
-  constructor() { }
+  constructor(private niceService: NiceService) { }
 
-  ngOnInit() {
+  getNice() {
+    this.corona.ic = [];
+    this.niceService.getData().subscribe((data: any[]) => {
+      this.nice = data;
+      data.forEach(item => {
+        this.corona.ic.push(item.newIntake);
+      });
+      this.calculateDelta();
+    });
+  }
+
+  calculateDelta() {
+    this.corona.delta = [];
+    let old;
+    this.corona.new.forEach(item => {
+      if (old && item)
+        this.corona.delta.push(item - old);
+      old = item;
+    });
+    this.coronaChart();
+  }
+
+  coronaChart() {
     this.chart = new Chart({
       chart: {
         type: 'line'
@@ -73,6 +98,10 @@ export class CoronaComponent implements OnInit {
         { name: 'new IC patients', data: this.corona.ic }
       ]
     });
+  }
+
+  ngOnInit() {
+    this.getNice();
 
     this.demographic = new Chart({
       chart: {
