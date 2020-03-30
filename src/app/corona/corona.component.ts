@@ -28,11 +28,20 @@ export class CoronaComponent implements OnInit {
   constructor(private niceService: NiceService) { }
 
   getNice() {
+    let beforeMarch = 0;
     this.corona.ic = [];
     this.niceService.getData().subscribe((data: any[]) => {
       this.nice = data;
       data.forEach(item => {
-        this.corona.ic.push(item.newIntake);
+        if (item.date.includes('-02-'))
+          beforeMarch += item.newIntake;
+        else {
+          if (beforeMarch) {
+            this.corona.ic.push(beforeMarch);
+            beforeMarch = 0;
+          }
+          this.corona.ic.push(item.newIntake);
+        }
       });
       this.calculateDelta();
     });
@@ -84,6 +93,9 @@ export class CoronaComponent implements OnInit {
         '25/Mar',
         '26/Mar',
         '27/Mar',
+        '28/Mar',
+        '29/Mar',
+        '30/Mar',
       ]},
       title: {
         text: 'Corona in The Netherlands'
