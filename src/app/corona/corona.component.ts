@@ -12,7 +12,6 @@ import { NiceService } from '../services/nice.service';
 export class CoronaComponent implements OnInit {
   nice;
   chart;
-  // 6,-3,5,-2,9,29,2,14,17,-21,5,60,-10,80,-35,21,102,14,54,63,125,103,-63,-18,266,41,167,153
   corona = {
     'new': [6,3,8,6,15,44,46,60,77,56,61,121,111,190,155,176,278,292,346,409,534,637,573,545,811,852,1019,1172,1159,1104,884,845,1019],
     'delta': [],
@@ -96,6 +95,8 @@ export class CoronaComponent implements OnInit {
         '28/Mar',
         '29/Mar',
         '30/Mar',
+        '31/MAr',
+        '1/Apr',
       ]},
       title: {
         text: 'Corona in The Netherlands'
