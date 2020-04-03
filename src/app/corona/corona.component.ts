@@ -123,6 +123,7 @@ export class CoronaComponent implements OnInit {
         this.corona.deathsDelta[key] = 0;
       old = value ? value : old;
     });
+    // cleanup the data (for highcharts)
     this.corona.dates.forEach((date, key) => {
       if (this.corona.ic[key] === undefined)
         this.corona.ic[key] = 0;
@@ -161,7 +162,7 @@ export class CoronaComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
-
+/*
     this.demographic = new Chart({
       chart: {
         type: 'bar'
@@ -179,7 +180,7 @@ export class CoronaComponent implements OnInit {
         { name: 'Was/Is in hospital', data: this.corona.demographic.hospital, color: 'green' },
         { name: 'Deaths', data: this.corona.demographic.deaths, color: 'red' }
       ]
-    });
+    });*/
 
   }
 

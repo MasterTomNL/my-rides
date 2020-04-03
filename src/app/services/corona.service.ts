@@ -6,6 +6,7 @@ export class CoronaService {
   icUrl = 'https://stichting-nice.nl/covid-19/public/new-intake/';
   dailyUrl = 'https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data/rivm_corona_in_nl_daily.csv';
   deathsUrl = 'https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data/rivm_corona_in_nl_fatalities.csv';
+  demographicsUrl = 'https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data/rivm_NL_covid19_age.csv';
 
   constructor(private http: HttpClient) { }
 
@@ -17,5 +18,8 @@ export class CoronaService {
   }
   getDeaths() {
     return this.http.get(this.deathsUrl, { responseType: 'text'});
+  }
+  getDemographics() {
+    return this.http.get(this.demographicsUrl, { responseType: 'text'});
   }
 }
