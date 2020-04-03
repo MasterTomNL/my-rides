@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Chart } from 'angular-highcharts';
-import { NiceService } from '../services/nice.service';
+import { CoronaService } from '../services/corona.service';
 
 
 @Component({
@@ -13,10 +13,13 @@ export class CoronaComponent implements OnInit {
   nice;
   chart;
   corona = {
-    'new': [6,3,8,6,15,44,46,60,77,56,61,121,111,190,155,176,278,292,346,409,534,637,573,545,811,852,1019,1172,1159,1104,884,845,1019],
+    'dates': [],
+    'total': [],
+    'new': [],
     'delta': [],
-    'deaths': [0,0,0,0,0,0,1,0,2,0,1,1,0,5,2,8,4,19,15,18,30,30,43,34,63,80,78,112,93,132,93,175,134],
-    'ic': [], //[1,1,0,0,3,1,2,3,5,4,8,6,21,14,17,27,33,35,53,55,86,66,68,100,104,105,82
+    'deaths': [],
+    'deathsDelta': [],
+    'ic': [],
     'demographic': {
       'recorded': [23,6,30,42,119,322,330,283,282,460,529,602,487,484,562,599,574,426,175,53,24],
       'hospital': [10,1,4,4,5,23,28,20,27,87,115,131,157,226,265,275,233,167,47,3,5],
@@ -24,35 +27,108 @@ export class CoronaComponent implements OnInit {
     }
   };
 
-  constructor(private niceService: NiceService) { }
+  constructor(private coronaService: CoronaService) { }
 
-  getNice() {
+  getData() {
+    this.getDaily();
+  }
+
+  getIC() {
     let beforeMarch = 0;
     this.corona.ic = [];
-    this.niceService.getData().subscribe((data: any[]) => {
+    this.coronaService.getIC().subscribe((data: any[]) => {
       this.nice = data;
       data.forEach(item => {
-        if (item.date.includes('-02-'))
-          beforeMarch += item.newIntake;
-        else {
-          if (beforeMarch) {
-            this.corona.ic.push(beforeMarch);
-            beforeMarch = 0;
-          }
-          this.corona.ic.push(item.newIntake);
-        }
+        let index = this.corona.dates.indexOf(item.date);
+        if (index >= 0)
+          this.corona.ic[index] = item.newIntake;
       });
-      this.calculateDelta();
+      this.getDeaths();
     });
   }
 
+  getDaily() {
+    this.coronaService.getDaily().subscribe(
+      data => this.extractData(data, 'total')
+    );
+  }
+  
+  getDeaths() {
+    this.coronaService.getDeaths().subscribe(
+      data => this.extractData(data, 'deaths')
+    );
+  }
+
+  extractData(res: any, type: string) {
+    let allTextLines = res.split(/\r\n|\n/);
+    let lines = [];
+    let line = {};
+    let tmp = [];
+    let raw = [];
+    let headers = allTextLines[0].split(',');
+
+    allTextLines.forEach((value, index) => {
+      tmp = value.split(',');
+      line = {};
+      if (index > 0 && tmp[0]) {
+        let dateIndex = this.corona.dates.indexOf(tmp[0]);
+        if (dateIndex < 0) {
+          this.corona.dates.push(tmp[0]);
+          this.corona[type][this.corona.dates.length-1] = tmp[1];
+        }
+        else
+          this.corona[type][dateIndex] = tmp[1];
+      }
+    });
+   
+    if (type == 'total') {
+      this.calculateDelta();
+      this.getIC();
+    } else {
+      this.calculateDeathsDelta();
+    }
+  }
+  handleError(err) {
+    return err.message;
+  }
+
   calculateDelta() {
-    this.corona.delta = [];
     let old;
-    this.corona.new.forEach(item => {
-      if (old && item)
-        this.corona.delta.push(item - old);
-      old = item;
+    // from total to new
+    this.corona.total.forEach((value, key) => {
+      if (old && value)
+        this.corona.new[key] = value - old;
+      else
+        this.corona.new[key] = 0;
+      old = value ? value : old;
+    });
+    old = 0;
+    // from new to delta (new)
+    this.corona.new.forEach((value, key) => {
+      if (old && value)
+        this.corona.delta[key] = value - old;
+      else
+        this.corona.delta[key] = 0;
+      old = value ? value : old;
+    });
+  }
+
+  calculateDeathsDelta() {
+    let old;
+    this.corona.deaths.forEach((value, key) => {
+      if (old && value)
+        this.corona.deathsDelta[key] = value - old;
+      else
+        this.corona.deathsDelta[key] = 0;
+      old = value ? value : old;
+    });
+    this.corona.dates.forEach((date, key) => {
+      if (this.corona.ic[key] === undefined)
+        this.corona.ic[key] = 0;
+      if (this.corona.deaths[key] === undefined)
+        this.corona.deaths[key] = 0;
+      if (this.corona.deathsDelta[key] === undefined)
+        this.corona.deathsDelta[key] = 0;
     });
     this.coronaChart();
   }
@@ -63,41 +139,7 @@ export class CoronaComponent implements OnInit {
         type: 'line'
       },
       yAxis: { title: { text: ''}},
-      xAxis: { categories: [
-        'Eerder',
-        '01/Mar',
-        '02/Mar',
-        '03/Mar',
-        '04/Mar',
-        '05/Mar',
-        '06/Mar',
-        '07/Mar',
-        '08/Mar',
-        '09/Mar',
-        '10/Mar',
-        '11/Mar',
-        '12/Mar',
-        '13/Mar',
-        '14/Mar',
-        '15/Mar',
-        '16/Mar',
-        '17/Mar',
-        '18/Mar',
-        '19/Mar',
-        '20/Mar',
-        '21/Mar',
-        '22/Mar',
-        '23/Mar',
-        '24/Mar',
-        '25/Mar',
-        '26/Mar',
-        '27/Mar',
-        '28/Mar',
-        '29/Mar',
-        '30/Mar',
-        '31/MAr',
-        '1/Apr',
-      ]},
+      xAxis: { categories: this.corona.dates },
       title: {
         text: 'Corona in The Netherlands'
       },
@@ -107,14 +149,14 @@ export class CoronaComponent implements OnInit {
       series: [
         { name: 'New cases', data: this.corona.new, color: 'black' },
         { name: 'Change in growth', data: this.corona.delta, color: 'orange' },
-        { name: 'Deaths', data: this.corona.deaths, color: 'red' },
+        { name: 'Deaths', data: this.corona.deathsDelta, color: 'red' },
         { name: 'new IC patients', data: this.corona.ic }
       ]
     });
   }
 
   ngOnInit() {
-    this.getNice();
+    this.getData();
 
     this.demographic = new Chart({
       chart: {
