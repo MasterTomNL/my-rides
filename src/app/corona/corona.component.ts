@@ -12,6 +12,7 @@ import { CoronaService } from '../services/corona.service';
 export class CoronaComponent implements OnInit {
   nice;
   chart;
+  deathsAndIc;
   corona = {
     'dates': [],
     'total': [],
@@ -135,20 +136,23 @@ export class CoronaComponent implements OnInit {
 
   coronaChart() {
     this.chart = new Chart({
-      chart: {
-        type: 'line'
-      },
+      chart: { type: 'line' },
       yAxis: { title: { text: ''}},
       xAxis: { categories: this.corona.dates },
-      title: {
-        text: 'Corona in The Netherlands'
-      },
-      credits: {
-        enabled: false
-      },
+      title: { text: 'Corona cases in The Netherlands' },
+      credits: { enabled: false },
       series: [
         { name: 'New cases', data: this.corona.new, color: 'black' },
-        { name: 'Change in growth', data: this.corona.delta, color: 'orange' },
+        { name: 'Change in growth', data: this.corona.delta, color: 'orange' }
+      ]
+    });
+    this.deathsAndIc = new Chart({
+      chart: { type: 'line' },
+      yAxis: { title: { text: ''} },
+      xAxis: { categories: this.corona.dates },
+      title: { text: 'Corona deaths and IC submissions' },
+      credits: { enabled: false },
+      series: [
         { name: 'Deaths', data: this.corona.deathsDelta, color: 'red' },
         { name: 'new IC patients', data: this.corona.ic }
       ]
