@@ -22,6 +22,7 @@ export class CoronaComponent implements OnInit {
     'delta': [],
     'deaths': [],
     'deathsDelta': [],
+    'deathsDates': [],
     'ic': [],
     'demographics': {
       'categories': [],
@@ -40,7 +41,7 @@ export class CoronaComponent implements OnInit {
   getDaily() {
     this.coronaService.getDaily().subscribe(
       data => {
-        this.extractData(data, 'total');
+        this.extractData(data);
         this.calculateDelta();
         this.getDeaths();
       }
@@ -50,7 +51,7 @@ export class CoronaComponent implements OnInit {
   getDeaths() {
     this.coronaService.getDeaths().subscribe(
       data => {
-        this.extractData(data, 'deaths');
+        this.extractDeathsData(data);
         this.calculateDeathsDelta();
         this.getDemographics();
       }
@@ -70,9 +71,8 @@ export class CoronaComponent implements OnInit {
     let beforeMarch = 0;
     this.corona.ic = [];
     this.coronaService.getIC().subscribe((data: any[]) => {
-      this.nice = data;
       data.forEach(item => {
-        let index = this.corona.dates.indexOf(item.date);
+        let index = this.corona.deathsDates.indexOf(item.date);
         if (index >= 0)
           this.corona.ic[index] = item.newIntake;
       });
@@ -92,7 +92,7 @@ export class CoronaComponent implements OnInit {
     return arr;
   }
 
-  extractData(res: any, type: string) {
+  extractData(res: any) {
     let data = this.toArray(res);
     let raw = [];
     let tmp;
@@ -101,10 +101,26 @@ export class CoronaComponent implements OnInit {
       let dateIndex = this.corona.dates.indexOf(line[0]);
       if (dateIndex < 0) {
         this.corona.dates.push(line[0]);
-        this.corona[type][this.corona.dates.length-1] = line[1];
+        this.corona.total[this.corona.dates.length-1] = line[1];
       }
       else
-        this.corona[type][dateIndex] = line[1];
+        this.corona.total[dateIndex] = line[1];
+    });
+  }
+
+  extractDeathsData(res: any) {
+    let data = this.toArray(res);
+    let raw = [];
+    let tmp;
+    
+    data.forEach(line => {
+      let dateIndex = this.corona.deathsDates.indexOf(line[0]);
+      if (dateIndex < 0) {
+        this.corona.deathsDates.push(line[0]);
+        this.corona.deaths[this.corona.deathsDates.length-1] = line[1];
+      }
+      else
+        this.corona.deaths[dateIndex] = line[1];
     });
   }
 
@@ -171,7 +187,7 @@ export class CoronaComponent implements OnInit {
 
   cleanup() {
     // cleanup the data (for highcharts)
-    this.corona.dates.forEach((date, key) => {
+    this.corona.deathsDates.forEach((date, key) => {
       if (this.corona.ic[key] === undefined)
         this.corona.ic[key] = 0;
       if (this.corona.deaths[key] === undefined)
@@ -179,6 +195,12 @@ export class CoronaComponent implements OnInit {
       if (this.corona.deathsDelta[key] === undefined)
         this.corona.deathsDelta[key] = 0;
     });
+    this.corona.dates.pop();
+    this.corona.new.pop();
+    this.corona.delta.pop();
+    this.corona.ic.pop();
+    this.corona.deaths.pop();
+    this.corona.deathsDelta.pop();
   }
 
   createCharts() {
@@ -198,7 +220,7 @@ export class CoronaComponent implements OnInit {
     this.chartDeathsIc = new Chart({
       chart: { type: 'line' },
       yAxis: { title: { text: ''} },
-      xAxis: { categories: this.corona.dates },
+      xAxis: { categories: this.corona.deathsDates },
       title: { text: 'Corona deaths and IC submissions' },
       credits: { enabled: false },
       series: [
