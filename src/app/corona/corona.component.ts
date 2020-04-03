@@ -12,7 +12,9 @@ import { CoronaService } from '../services/corona.service';
 export class CoronaComponent implements OnInit {
   nice;
   chart;
-  deathsAndIc;
+  chartNewDelta;
+  chartDeathsIc;
+  chartDemographics;
   corona = {
     'dates': [],
     'total': [],
@@ -21,17 +23,47 @@ export class CoronaComponent implements OnInit {
     'deaths': [],
     'deathsDelta': [],
     'ic': [],
-    'demographic': {
-      'recorded': [23,6,30,42,119,322,330,283,282,460,529,602,487,484,562,599,574,426,175,53,24],
-      'hospital': [10,1,4,4,5,23,28,20,27,87,115,131,157,226,265,275,233,167,47,3,5],
-      'deaths': [0,0,0,0,0,0,0,0,0,0,2,2,7,24,33,70,105,80,23,9,1],
+    'demographics': {
+      'categories': [],
+      'deaths': [],
+      'hospital': [],
+      'cases': [] 
     }
   };
 
   constructor(private coronaService: CoronaService) { }
 
-  getData() {
+  ngOnInit() {
     this.getDaily();
+  }
+
+  getDaily() {
+    this.coronaService.getDaily().subscribe(
+      data => {
+        this.extractData(data, 'total');
+        this.calculateDelta();
+        this.getDeaths();
+      }
+    );
+  }
+  
+  getDeaths() {
+    this.coronaService.getDeaths().subscribe(
+      data => {
+        this.extractData(data, 'deaths');
+        this.calculateDeathsDelta();
+        this.getDemographics();
+      }
+    );
+  }
+
+  getDemographics() {
+    this.coronaService.getDemographics().subscribe(
+      data => {
+        this.extractDemographics(data);
+        this.getIC();
+      }
+    );
   }
 
   getIC() {
@@ -44,53 +76,65 @@ export class CoronaComponent implements OnInit {
         if (index >= 0)
           this.corona.ic[index] = item.newIntake;
       });
-      this.getDeaths();
+      this.cleanup();
+      this.createCharts();
     });
   }
 
-  getDaily() {
-    this.coronaService.getDaily().subscribe(
-      data => this.extractData(data, 'total')
-    );
-  }
-  
-  getDeaths() {
-    this.coronaService.getDeaths().subscribe(
-      data => this.extractData(data, 'deaths')
-    );
+  toArray(res: any) {
+    let lines = res.split(/\r\n|\n/);
+    let arr = [];
+    lines.forEach((line, index) => {
+      if (index > 0) {
+        arr.push(line.split(','));
+      }
+    });
+    return arr;
   }
 
   extractData(res: any, type: string) {
-    let allTextLines = res.split(/\r\n|\n/);
-    let lines = [];
-    let line = {};
-    let tmp = [];
+    let data = this.toArray(res);
     let raw = [];
-    let headers = allTextLines[0].split(',');
+    let tmp;
+    
+    data.forEach(line => {
+      let dateIndex = this.corona.dates.indexOf(line[0]);
+      if (dateIndex < 0) {
+        this.corona.dates.push(line[0]);
+        this.corona[type][this.corona.dates.length-1] = line[1];
+      }
+      else
+        this.corona[type][dateIndex] = line[1];
+    });
+  }
 
-    allTextLines.forEach((value, index) => {
-      tmp = value.split(',');
-      line = {};
-      if (index > 0 && tmp[0]) {
-        let dateIndex = this.corona.dates.indexOf(tmp[0]);
-        if (dateIndex < 0) {
-          this.corona.dates.push(tmp[0]);
-          this.corona[type][this.corona.dates.length-1] = tmp[1];
+  extractDemographics(res: any) {
+    let data = this.toArray(res);
+    let ageIndex;
+    // 0: date
+    // 1: age
+    // 2: type (Overleden/Totaal/Ziekenhuisopname)
+    // 3: aantal
+    let categories = {
+      'Overleden': 'deaths',
+      'Totaal': 'cases',
+      'Ziekenhuisopname': 'hospital'
+    }
+
+    data.forEach(arr => {
+      ageIndex = this.corona.demographics.categories.indexOf(arr[1])
+      if (ageIndex < 0) {
+        if (arr.length == 4) {
+          this.corona.demographics.categories.push(arr[1]);
+          this.corona.demographics[categories[arr[2]]].push(parseInt(arr[3]));
         }
+      } else {
+        if (!this.corona.demographics[categories[arr[2]]][ageIndex])
+          this.corona.demographics[categories[arr[2]]][ageIndex] = parseInt(arr[3]);
         else
-          this.corona[type][dateIndex] = tmp[1];
+          this.corona.demographics[categories[arr[2]]][ageIndex] += parseInt(arr[3]);
       }
     });
-   
-    if (type == 'total') {
-      this.calculateDelta();
-      this.getIC();
-    } else {
-      this.calculateDeathsDelta();
-    }
-  }
-  handleError(err) {
-    return err.message;
   }
 
   calculateDelta() {
@@ -123,6 +167,9 @@ export class CoronaComponent implements OnInit {
         this.corona.deathsDelta[key] = 0;
       old = value ? value : old;
     });
+  }
+
+  cleanup() {
     // cleanup the data (for highcharts)
     this.corona.dates.forEach((date, key) => {
       if (this.corona.ic[key] === undefined)
@@ -132,11 +179,16 @@ export class CoronaComponent implements OnInit {
       if (this.corona.deathsDelta[key] === undefined)
         this.corona.deathsDelta[key] = 0;
     });
-    this.coronaChart();
+    // cleanup demographics
+    console.log(this.corona.demographics);
+    this.corona.demographics.categories.forEach((age, key) => {
+
+    });
   }
 
-  coronaChart() {
-    this.chart = new Chart({
+  createCharts() {
+    // new and delta
+    this.chartNewDelta = new Chart({
       chart: { type: 'line' },
       yAxis: { title: { text: ''}},
       xAxis: { categories: this.corona.dates },
@@ -147,7 +199,8 @@ export class CoronaComponent implements OnInit {
         { name: 'Change in growth', data: this.corona.delta, color: 'orange' }
       ]
     });
-    this.deathsAndIc = new Chart({
+    // deaths and IC
+    this.chartDeathsIc = new Chart({
       chart: { type: 'line' },
       yAxis: { title: { text: ''} },
       xAxis: { categories: this.corona.dates },
@@ -158,30 +211,21 @@ export class CoronaComponent implements OnInit {
         { name: 'new IC patients', data: this.corona.ic }
       ]
     });
-  }
-
-  ngOnInit() {
-    this.getData();
-/*
-    this.demographic = new Chart({
-      chart: {
-        type: 'bar'
-      },
+    // demographics
+    this.chartDemographics = new Chart({
+      chart: { type: 'bar' },
       yAxis: { title: { text: ''}},
-      xAxis: { title: { text:'Age' }, categories: [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,'NA']},
-      title: {
-        text: 'Demographic'
+      xAxis: {
+        title: { text:'Age' },
+        categories: this.corona.demographics.categories
       },
-      credits: {
-        enabled: false
-      },
+      title: { text: 'Demographic' },
+      credits: { enabled: false },
       series: [
-        { name: 'Verified cases', data: this.corona.demographic.recorded, color: 'black' },
-        { name: 'Was/Is in hospital', data: this.corona.demographic.hospital, color: 'green' },
-        { name: 'Deaths', data: this.corona.demographic.deaths, color: 'red' }
+        { name: 'Verified cases', data: this.corona.demographics.cases, color: 'black' },
+        { name: 'Was/Is in hospital', data: this.corona.demographics.hospital, color: 'green' },
+        { name: 'Deaths', data: this.corona.demographics.deaths, color: 'red' }
       ]
-    });*/
-
+    });
   }
-
 }
