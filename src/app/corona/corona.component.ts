@@ -179,11 +179,6 @@ export class CoronaComponent implements OnInit {
       if (this.corona.deathsDelta[key] === undefined)
         this.corona.deathsDelta[key] = 0;
     });
-    // cleanup demographics
-    console.log(this.corona.demographics);
-    this.corona.demographics.categories.forEach((age, key) => {
-
-    });
   }
 
   createCharts() {
