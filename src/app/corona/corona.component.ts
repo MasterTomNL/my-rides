@@ -71,10 +71,11 @@ export class CoronaComponent implements OnInit {
     let beforeMarch = 0;
     this.corona.ic = [];
     this.coronaService.getIC().subscribe((data: any[]) => {
-      data.forEach(item => {
+      /console.log(data);
+      data[0].forEach(item => {
         let index = this.corona.deathsDates.indexOf(item.date);
         if (index >= 0)
-          this.corona.ic[index] = item.newIntake;
+          this.corona.ic[index] = item.value;
       });
       this.cleanup();
       this.createCharts();
