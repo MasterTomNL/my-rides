@@ -1,9 +1,13 @@
 <h2>Mahjong</h2>
 
-<div *ngFor="let t of tiles" class="tile">
+<div *ngFor="let t of hand" class="tile">
   <i class="{{ t.class }}"></i>
   <label>{{ t.value }}</label>
 </div>
-<p>
-mahjong works!
-</p>
+
+<div class="tile_grid">
+  <div *ngFor="let t of tiles" class="tile">
+    <i class="{{ t.class }}"></i>
+    <label>{{ t.value }}</label>
+  </div>
+</div>
