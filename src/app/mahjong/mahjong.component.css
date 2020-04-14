@@ -1,5 +1,5 @@
 .tile_grid {
-  width: 3240px;
+  width: 324px;
 }
 .tile {
   display: inline-block;
@@ -25,37 +25,37 @@
   background-repeat: no-repeat;
 }
 
-.c-1 { background-image: url('assets/svg/C1.svg'); }
-.c-2 { background-image: url('assets/svg/C2.svg'); }
-.c-3 { background-image: url('assets/svg/C3.svg'); }
-.c-4 { background-image: url('assets/svg/C4.svg'); }
-.c-5 { background-image: url('assets/svg/C5.svg'); }
-.c-6 { background-image: url('assets/svg/C6.svg'); }
-.c-7 { background-image: url('assets/svg/C7.svg'); }
-.c-8 { background-image: url('assets/svg/C8.svg'); }
-.c-9 { background-image: url('assets/svg/C9.svg'); }
-.b-1 { background-image: url('assets/svg/B1.svg'); }
-.b-2 { background-image: url('assets/svg/B2.svg'); }
-.b-3 { background-image: url('assets/svg/B3.svg'); }
-.b-4 { background-image: url('assets/svg/B4.svg'); }
-.b-5 { background-image: url('assets/svg/B5.svg'); }
-.b-6 { background-image: url('assets/svg/B6.svg'); }
-.b-7 { background-image: url('assets/svg/B7.svg'); }
-.b-8 { background-image: url('assets/svg/B8.svg'); }
-.b-9 { background-image: url('assets/svg/B9.svg'); }
-.s-1 { background-image: url('assets/svg/S1.svg'); }
-.s-2 { background-image: url('assets/svg/S2.svg'); }
-.s-3 { background-image: url('assets/svg/S3.svg'); }
-.s-4 { background-image: url('assets/svg/S4.svg'); }
-.s-5 { background-image: url('assets/svg/S5.svg'); }
-.s-6 { background-image: url('assets/svg/S6.svg'); }
-.s-7 { background-image: url('assets/svg/S7.svg'); }
-.s-8 { background-image: url('assets/svg/S8.svg'); }
-.s-9 { background-image: url('assets/svg/S9.svg'); }
-.d-g { background-image: url('assets/svg/dragon-green.svg'); }
-.d-r { background-image: url('assets/svg/dragon-red.svg'); }
-.d-w { background-image: url('assets/svg/dragon-white.svg'); }
-.w-n { background-image: url('assets/svg/dragon-white.svg'); }
-.w-s { background-image: url('assets/svg/dragon-white.svg'); }
-.w-e { background-image: url('assets/svg/dragon-white.svg'); }
-.w-w { background-image: url('assets/svg/dragon-white.svg'); }
+.c-1 { background-image: url('svg/C1.svg'); }
+.c-2 { background-image: url('svg/C2.svg'); }
+.c-3 { background-image: url('svg/C3.svg'); }
+.c-4 { background-image: url('svg/C4.svg'); }
+.c-5 { background-image: url('svg/C5.svg'); }
+.c-6 { background-image: url('svg/C6.svg'); }
+.c-7 { background-image: url('svg/C7.svg'); }
+.c-8 { background-image: url('svg/C8.svg'); }
+.c-9 { background-image: url('svg/C9.svg'); }
+.b-1 { background-image: url('svg/B1.svg'); }
+.b-2 { background-image: url('svg/B2.svg'); }
+.b-3 { background-image: url('svg/B3.svg'); }
+.b-4 { background-image: url('svg/B4.svg'); }
+.b-5 { background-image: url('svg/B5.svg'); }
+.b-6 { background-image: url('svg/B6.svg'); }
+.b-7 { background-image: url('svg/B7.svg'); }
+.b-8 { background-image: url('svg/B8.svg'); }
+.b-9 { background-image: url('svg/B9.svg'); }
+.s-1 { background-image: url('svg/S1.svg'); }
+.s-2 { background-image: url('svg/S2.svg'); }
+.s-3 { background-image: url('svg/S3.svg'); }
+.s-4 { background-image: url('svg/S4.svg'); }
+.s-5 { background-image: url('svg/S5.svg'); }
+.s-6 { background-image: url('svg/S6.svg'); }
+.s-7 { background-image: url('svg/S7.svg'); }
+.s-8 { background-image: url('svg/S8.svg'); }
+.s-9 { background-image: url('svg/S9.svg'); }
+.d-g { background-image: url('svg/dragon-green.svg'); }
+.d-r { background-image: url('svg/dragon-red.svg'); }
+.d-w { background-image: url('svg/dragon-white.svg'); }
+.w-n { background-image: url('svg/dragon-white.svg'); }
+.w-s { background-image: url('svg/dragon-white.svg'); }
+.w-e { background-image: url('svg/dragon-white.svg'); }
+.w-w { background-image: url('svg/dragon-white.svg'); }
