@@ -71,7 +71,7 @@ export class CoronaComponent implements OnInit {
     let beforeMarch = 0;
     this.corona.ic = [];
     this.coronaService.getIC().subscribe((data: any[]) => {
-      /console.log(data);
+      console.log(data);
       data[0].forEach(item => {
         let index = this.corona.deathsDates.indexOf(item.date);
         if (index >= 0)

@@ -14,12 +14,12 @@ export class CoronaService {
     return this.http.get<any>(this.icUrl);
   }
   getDaily() {
-    return this.http.get(this.dailyUrl, { responseType: 'text'});
+    return []; //this.http.get(this.dailyUrl, { responseType: 'text'});
   }
   getDeaths() {
-    return this.http.get(this.deathsUrl, { responseType: 'text'});
+    return []; //this.http.get(this.deathsUrl, { responseType: 'text'});
   }
   getDemographics() {
-    return this.http.get(this.demographicsUrl, { responseType: 'text'});
+    return []; //this.http.get(this.demographicsUrl, { responseType: 'text'});
   }
 }
