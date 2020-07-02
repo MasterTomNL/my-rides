@@ -32,7 +32,7 @@ import { RideVehiclePipe } from './ride-list/ride-vehicle.pipe';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { firebaseConfig } from './firebase-config.ts';
+import { firebaseConfig } from './firebase-config';
 
 import { ChartModule } from 'angular-highcharts';
 
@@ -48,6 +48,7 @@ import { JigsawComponent } from './jigsaw/jigsaw.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MahjongComponent } from './mahjong/mahjong.component';
 import { CoronaComponent } from './corona/corona.component';
+import { ModelBoxerComponent } from './model-boxer/model-boxer.component';
 
 
 const appRoutes: Routes = [
@@ -59,15 +60,10 @@ const appRoutes: Routes = [
   { path: '', component: RideListComponent },
   { path: 'jigsaw', component: JigsawComponent },
   { path: 'mahjong', component: MahjongComponent },
-  { path: 'rides',
-    redirectTo: '',
-    pathMatch: 'full'
-  },
+  { path: 'rides', redirectTo: '', pathMatch: 'full' },
   { path: 'corona', component: CoronaComponent },
-  { path: '**',
-    redirectTo: '',
-    pathMatch: 'full'
-  }
+  { path: 'model-boxer', component: ModelBoxerComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -113,6 +109,7 @@ const appRoutes: Routes = [
     JigsawComponent,
     MahjongComponent,
     CoronaComponent,
+    ModelBoxerComponent,
   ],
   bootstrap: [ AppComponent ],
   providers: [
