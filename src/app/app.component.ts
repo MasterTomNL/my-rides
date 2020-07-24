@@ -27,7 +27,7 @@ export class AppComponent  {
   }
 
   loginGoogle() {
-    this.authauth.signInWithPopup(this.googleAuthProvider)
+    this.auth.signInWithPopup(this.googleAuthProvider)
       .then(
         (result) => {
           console.log('logged in');
